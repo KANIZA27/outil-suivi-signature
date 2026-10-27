@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Application d'essai : pointage, missions, double signature, calcul des heures et envoi au Département.">
 <title>Outil de suivi et de signature dématérialisée</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1F2E2B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Suivi Signature">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
@@ -258,6 +266,10 @@ pre{background:var(--sunk);border-radius:10px;padding:12px;overflow-x:auto;font-
 .flow small{font-weight:400;color:var(--muted)}
 .flow b{color:var(--accent);font-size:1.3rem}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.btn{white-space:normal;text-align:center;max-width:100%}
+.panel-head>.row{flex:1 1 auto;max-width:100%}
+.row>.btn{min-width:0}
+.panel-head>div{min-width:0}
 .rub-det>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:32px}
 .rub-det>summary::-webkit-details-marker{display:none}
 .rub-hint{font-family:var(--body);font-size:.82rem;font-weight:700;color:var(--accent)}
@@ -1087,6 +1099,9 @@ button,summary,a{-webkit-tap-highlight-color:transparent}
   window.__calcHeures = calcHeures;
   render();
 })();
+</script>
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); }); }
 </script>
 </body>
 </html>

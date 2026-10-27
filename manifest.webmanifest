@@ -1,0 +1,30 @@
+{
+  "name": "Outil de suivi et de signature dématérialisée",
+  "short_name": "Suivi Signature",
+  "lang": "fr",
+  "description": "Pointage, missions, signature et calcul des heures pour l'aide à domicile.",
+  "start_url": "./application.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3F5F2",
+  "theme_color": "#1F2E2B",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

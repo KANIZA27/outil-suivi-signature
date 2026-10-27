@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Outil de suivi et de signature dématérialisée : un projet pour l'aide à domicile à Mayotte. Présentation, application d'essai, guide de test et avis.">
 <title>Fiche projet · Outil de suivi et de signature dématérialisée</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1F2E2B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Suivi Signature">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
@@ -95,11 +103,15 @@ footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padd
     <a class="card" href="application.html"><b>2. L'application</b><span>À essayer de préférence sur téléphone.</span><em>Ouvrir ›</em></a>
     <a class="card" href="avis.html"><b>3. Votre avis</b><span>Ce qui ne marche pas, ce qui n'est pas clair, vos idées.</span><em>Donner mon avis ›</em></a>
   </div>
-  <p class="lead" style="margin-top:6px">Pour en savoir plus :</p>
-  <div class="cards">
-    <a class="card" href="https://claude.ai/artifact/FBf3t5LYJWBv1A4jEtWrUB" target="_blank" rel="noopener"><b>La présentation</b><span>12 pages pour comprendre le projet.</span><em>Voir ›</em></a>
-    <a class="card" href="https://claude.ai/artifact/LZkoQfkCeqZnnxJU7iXTqy" target="_blank" rel="noopener"><b>Les dessins des écrans</b><span>Sur téléphone, tablette et ordinateur.</span><em>Voir ›</em></a>
-    <a class="card" href="https://claude.ai/code/artifact/4ed26619-f5f5-486c-961a-0899ed23c397" target="_blank" rel="noopener"><b>Le dossier complet</b><span>Tous les détails du projet.</span><em>Lire ›</em></a>
+</section>
+
+<section aria-labelledby="installer">
+  <h2 id="installer"><small>●</small>L'installer sur votre téléphone</h2>
+  <p class="lead">L'application peut s'installer comme une vraie appli, sans passer par un magasin d'applications. Ouvrez <a href="application.html">l'application</a>, puis :</p>
+  <div class="three">
+    <div class="box"><h3>Sur iPhone (Safari)</h3><p>Touchez le bouton Partager (le carré avec une flèche), puis « Sur l'écran d'accueil », puis « Ajouter ».</p></div>
+    <div class="box"><h3>Sur Android (Chrome)</h3><p>Touchez le menu ⋮ en haut à droite, puis « Installer l'application » ou « Ajouter à l'écran d'accueil ».</p></div>
+    <div class="box"><h3>Ensuite</h3><p>L'icône apparaît avec vos autres applis. Elle s'ouvre en plein écran, et marche même sans réseau après la première ouverture.</p></div>
   </div>
 </section>
 
@@ -187,5 +199,8 @@ footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padd
 
 <footer>Projet Outil de suivi et de signature dématérialisée · version d'essai : les noms, adresses et heures sont inventés · merci de ne pas partager sans mon accord.</footer>
 </div>
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); }); }
+</script>
 </body>
 </html>

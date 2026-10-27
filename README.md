@@ -14,6 +14,15 @@ Une application sur téléphone pour remplacer les feuilles papier qu'on fait si
 | `application.html` | L'application à essayer (intervenante, bureau, Département) |
 | `guide.html` | Le guide de test, étape par étape |
 | `avis.html` | Le formulaire pour donner son avis |
+| `404.html` | Page affichée si un lien est mal écrit |
+| `manifest.webmanifest`, `sw.js`, `icons/` | Installation sur téléphone et fonctionnement hors réseau |
+
+## Installer l'application sur un téléphone
+
+Le site est une **application web installable** (PWA) : une fois ajoutée à l'écran d'accueil, elle s'ouvre en plein écran et fonctionne sans réseau après la première ouverture.
+
+- **iPhone (Safari)** : bouton Partager › « Sur l'écran d'accueil ».
+- **Android (Chrome)** : menu ⋮ › « Installer l'application ».
 
 ## Mettre en ligne avec GitHub Pages
 
@@ -23,6 +32,6 @@ Une application sur téléphone pour remplacer les feuilles papier qu'on fait si
 
 ## Technique
 
-Pages HTML, CSS et JavaScript, sans serveur ni installation. Polices chargées depuis Google Fonts.
+Pages HTML, CSS et JavaScript, sans serveur. S'adapte aux petits et grands écrans (testé de 320 à 1440 pixels de large). Polices chargées depuis Google Fonts.
 
 © 2026 Kaniza SAINDOU. Tous droits réservés.

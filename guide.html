@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Guide de test de l'outil de suivi et de signature dématérialisée.">
 <title>Guide de test · Outil de suivi et de signature dématérialisée</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1F2E2B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Suivi Signature">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
@@ -60,7 +68,8 @@ section{display:flex;flex-direction:column;gap:12px}
 .step .check strong{color:var(--accent)}
 .step:has(input:checked){background:var(--accent-soft);border-color:transparent}
 .step:has(input:checked) b{text-decoration:line-through;text-decoration-color:var(--accent)}
-.k{background:var(--sunk);border-radius:6px;padding:1px 6px;font-weight:700;white-space:nowrap}
+.k{background:var(--sunk);border-radius:6px;padding:1px 6px;font-weight:700;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.step label>span{min-width:0;overflow-wrap:anywhere}
 .end{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 .end h2{font-size:1.5rem}
 .reset{border:0;background:none;color:var(--muted);text-decoration:underline;font:inherit;font-size:.9rem;padding:0;min-height:40px;cursor:pointer}
@@ -156,6 +165,9 @@ footer{color:var(--muted);font-size:.85rem}
   document.getElementById('reset').addEventListener('click', () => { boxes.forEach(b => { b.checked = false; }); save(); counts(); });
   counts();
 })();
+</script>
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); }); }
 </script>
 </body>
 </html>
