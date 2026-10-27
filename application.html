@@ -258,6 +258,26 @@ pre{background:var(--sunk);border-radius:10px;padding:12px;overflow-x:auto;font-
 .flow small{font-weight:400;color:var(--muted)}
 .flow b{color:var(--accent);font-size:1.3rem}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.rub-det>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:32px}
+.rub-det>summary::-webkit-details-marker{display:none}
+.rub-hint{font-family:var(--body);font-size:.82rem;font-weight:700;color:var(--accent)}
+.rub-body{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+button,summary,a{-webkit-tap-highlight-color:transparent}
+@media (max-width:640px){
+  body{padding-block:12px 40px}
+  .wrap{gap:10px}
+  .brand h1{font-size:1.15rem}
+  .brand p{display:none}
+  .top{gap:8px}
+  .top .seg{display:grid;grid-template-columns:repeat(3,1fr);width:100%;flex-wrap:nowrap}
+  .top .seg button{padding:8px 4px;font-size:.88rem;min-height:40px}
+  .demo{font-size:.78rem;padding:6px 10px;gap:4px 12px}
+  .nav-rub{padding:8px 12px}
+  .phone{border:0;box-shadow:none;padding:12px 2px 16px;border-radius:0;background:transparent}
+  .phone.login{border-radius:24px;padding:24px 12px}
+  .desk>.seg{display:grid;grid-template-columns:1fr 1fr;border-radius:16px}
+  .desk>.seg button{border-radius:12px;padding:8px 6px;font-size:.9rem}
+}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--hero);color:var(--hero-ink);padding:12px 18px;border-radius:12px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:calc(100% - 32px);text-align:center;pointer-events:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -276,7 +296,7 @@ pre{background:var(--sunk);border-radius:10px;padding:12px;overflow-x:auto;font-
     </div>
   </header>
   <div class="demo">
-    <span>Prototype de démonstration : personnes, dates et heures sont des exemples.</span>
+    <span>Version d'essai : les personnes et les heures sont des exemples.</span>
     <label for="demo-ferie"><input type="checkbox" id="demo-ferie"> Simuler un jour férié</label>
   </div>
   <nav class="nav-rub" id="rubriques" aria-label="Toutes les rubriques"></nav>
@@ -355,7 +375,7 @@ pre{background:var(--sunk);border-radius:10px;padding:12px;overflow-x:auto;font-
 
   const S = {
     view:'int', logged:false, pin:'', ferie:false, screen:{name:'list'}, tab:'jour', calc:false, calcAt:'', benef:'martin',
-    dep:null, sigB:null, sigI:null, nosig:null, more:false, bMode:'draw', mot:new Date().getDate(), motPause:false, form:null, exportTxt:null, last:Date.now(), rid:0,
+    navOpen: !(window.matchMedia && matchMedia('(max-width: 640px)').matches), dep:null, sigB:null, sigI:null, nosig:null, more:false, bMode:'draw', mot:new Date().getDate(), motPause:false, form:null, exportTxt:null, last:Date.now(), rid:0,
     visits:[
       {id:1, b:'lefevre', debut:'08:00', fin:'09:30', taches:['Aide au lever','Aide à la toilette','Préparation des repas'], faites:['Aide au lever','Aide à la toilette','Préparation des repas','Conversation et compagnie'], etat:'ok'},
       {id:2, b:'garcia', debut:'10:00', fin:'11:00', taches:['Courses','Entretien du logement'], faites:[], etat:'todo'},
@@ -650,7 +670,8 @@ pre{background:var(--sunk);border-radius:10px;padding:12px;overflow-x:auto;font-
     const cur = currentKey();
     const row = (title, list) => `<div class="rub-group"><span class="rub-label">${title}</span><div class="rub-row">${list.map(([k,l]) => `<button class="rub" data-goto="${k}" aria-current="${cur === k}">${l}</button>`).join('')}</div></div>`;
     const nav = document.getElementById('rubriques');
-    nav.innerHTML = `<span class="rub-title">Toutes les rubriques</span>` + row('Intervenante', RUBS.int) + row('Bureau', RUBS.bur) + row('Département', RUBS.dep);
+    nav.innerHTML = `<details class="rub-det"${S.navOpen ? ' open' : ''}><summary class="rub-title">Toutes les rubriques <span class="rub-hint">${S.navOpen ? 'masquer' : 'afficher'}</span></summary><div class="rub-body">` + row('Intervenante', RUBS.int) + row('Bureau', RUBS.bur) + row('Département', RUBS.dep) + `</div></details>`;
+    nav.querySelector('details').addEventListener('toggle', e => { S.navOpen = e.target.open; const h = nav.querySelector('.rub-hint'); if (h) h.textContent = S.navOpen ? 'masquer' : 'afficher'; });
     nav.querySelectorAll('.rub[aria-current="true"]').forEach(b => { const r = b.parentElement; r.scrollLeft = b.offsetLeft - r.offsetLeft - r.clientWidth / 2 + b.offsetWidth / 2; });
   }
   function nextVisit(){ return S.visits.find(x => x.etat === 'run') || S.visits.find(x => x.etat === 'todo'); }
