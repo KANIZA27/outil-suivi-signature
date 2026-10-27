@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Guide de test de l'outil de suivi et de signature dématérialisée.">
+<title>Guide de test · Outil de suivi et de signature dématérialisée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+<style>
+/* Layout: one reading column; hero with the two actions, then three numbered test sequences as tickable checklists, then a closing call to the feedback form */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --sunk:#E6ECE5; --ink:#1F2A2E; --muted:#56645F; --line:#D5DCD3;
+  --accent:#2F6B57; --accent-ink:#FFFFFF; --accent-soft:#DCEBE3; --warn-soft:#FBEBC8;
+  --hero:#1F2E2B; --hero-ink:#F3F5F2; --hero-muted:#B9CEC6; --hero-accent:#9FD3BC;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131A1A; --surface:#1B2424; --sunk:#243030; --ink:#E7EEEA; --muted:#A3B5AF; --line:#2F3D3C;
+  --accent:#7CC4A6; --accent-ink:#0E1A16; --accent-soft:#1F3A30; --warn-soft:#3A2E14;
+  --hero:#0E1514; --hero-ink:#E7EEEA; --hero-muted:#9DB0AA; --hero-accent:#9FD3BC;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131A1A; --surface:#1B2424; --sunk:#243030; --ink:#E7EEEA; --muted:#A3B5AF; --line:#2F3D3C;
+  --accent:#7CC4A6; --accent-ink:#0E1A16; --accent-soft:#1F3A30; --warn-soft:#3A2E14;
+  --hero:#0E1514; --hero-ink:#E7EEEA; --hero-muted:#9DB0AA; --hero-accent:#9FD3BC;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding:0 16px;padding-block:20px 64px}
+.page{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hero{background:var(--hero);color:var(--hero-ink);border-radius:24px;padding:32px 28px;display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--hero-accent)}
+.hero h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+.hero p{color:var(--hero-muted);max-width:60ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.fact{background:rgba(255,255,255,.08);color:var(--hero-ink);border-radius:999px;padding:6px 12px;font-size:.9rem}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:14px;font-weight:700;text-decoration:none;font-size:1.02rem}
+.btn.primary{background:var(--hero-accent);color:#0E1A16}
+.btn.ghost{border:2px solid var(--hero-muted);color:var(--hero-ink)}
+.btn.solid{background:var(--accent);color:var(--accent-ink)}
+.tips{background:var(--warn-soft);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.tips ul{margin:0;padding-left:20px}
+section{display:flex;flex-direction:column;gap:12px}
+.shead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.shead h2{font-size:1.5rem;font-weight:800}
+.count{font-size:.9rem;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.step label{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:16px;cursor:pointer;align-items:start}
+.step input{width:24px;height:24px;margin:2px 0 0;accent-color:var(--accent)}
+.step b{display:block;font-size:1.05rem}
+.step .how{color:var(--ink);margin-top:4px}
+.step .check{color:var(--muted);font-size:.93rem;margin-top:6px}
+.step .check strong{color:var(--accent)}
+.step:has(input:checked){background:var(--accent-soft);border-color:transparent}
+.step:has(input:checked) b{text-decoration:line-through;text-decoration-color:var(--accent)}
+.k{background:var(--sunk);border-radius:6px;padding:1px 6px;font-weight:700;white-space:nowrap}
+.end{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.end h2{font-size:1.5rem}
+.reset{border:0;background:none;color:var(--muted);text-decoration:underline;font:inherit;font-size:.9rem;padding:0;min-height:40px;cursor:pointer}
+footer{color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="eyebrow">Guide de test · 15 minutes</div>
+    <h1>Tester l’outil de suivi et de signature dématérialisée</h1>
+    <p>Merci de m'aider ! Cette application remplace les feuilles d'émargement papier de l'aide à domicile : l'intervenante pointe et fait signer sur son téléphone, et le bureau calcule les heures automatiquement. Suis les étapes, coche-les au fur et à mesure, puis donne ton avis.</p>
+    <div class="facts"><span class="fact">Idéalement sur téléphone</span><span class="fact">Code : 4 chiffres au hasard</span><span class="fact">Données fictives</span></div>
+    <div class="actions">
+      <a class="btn primary" href="application.html">Ouvrir l'application ›</a>
+      <a class="btn ghost" href="avis.html">Donner mon avis</a>
+    </div>
+  </header>
+
+  <div class="tips">
+    <b>Avant de commencer</b>
+    <ul>
+      <li>Garde ce guide ouvert dans un onglet et l'application dans un autre.</li>
+      <li>Si tu recharges l'application, tout revient à zéro : c'est normal, c'est une démo.</li>
+      <li>Note tout ce qui te surprend, même un détail. Il n'y a pas de mauvaise remarque.</li>
+    </ul>
+  </div>
+
+  <section aria-labelledby="s1">
+    <div class="shead"><h2 id="s1">1. Côté intervenante</h2><span class="count" data-count="a"></span></div>
+    <ol class="steps" data-group="a">
+      <li class="step"><label><input type="checkbox" id="a1"><span><b>Se connecter</b><p class="how">Tape 4 chiffres au hasard, ou touche le bouton empreinte.</p><p class="check"><strong>À vérifier :</strong> le planning du jour s'affiche.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a1b"><span><b>Le mot du jour et le menu</b><p class="how">Sur l'accueil, lis le <span class="k">mot du jour</span> : il change tout seul toutes les 7 secondes (essaie <span class="k">Pause</span> et <span class="k">Mot suivant</span>). En haut de la page, le menu <span class="k">Toutes les rubriques</span> permet d'aller directement à chaque écran.</p><p class="check"><strong>À vérifier :</strong> les messages sont agréables à lire, et le menu permet de retrouver chaque rubrique facilement.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a2"><span><b>Faire un passage complet</b><p class="how">Touche <span class="k">M. Ahmed Combo</span>, puis <span class="k">Je suis arrivée</span>. Coche les missions réalisées, et ajoute-en une avec <span class="k">+ Autre mission réalisée</span> (par exemple « Conversation et compagnie »). Touche <span class="k">Fin de l'intervention</span>, fais signer le bénéficiaire puis l'intervenante, et touche <span class="k">Valider le passage</span>.</p><p class="check"><strong>À vérifier :</strong> cocher une mission est rapide, le bouton Valider ne s'active qu'avec les deux signatures, puis un écran récapitulatif affiche la durée du passage et tes heures du jour, de la semaine et du mois, calculées automatiquement.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a2b"><span><b>Une signature facile pour une personne âgée</b><p class="how">Sur un autre passage, à l'écran de signature : touche <span class="k">⤢ Agrandir</span> pour signer en plein écran, puis <span class="k">🧽 Effacer</span> et recommence. Essaie aussi <span class="k">👆 Valider d'un appui</span>, prévu pour une personne qui ne peut pas écrire.</p><p class="check"><strong>À vérifier :</strong> une croix ou un simple point suffit, l'effacement marche, et la consigne en français et en arabe est claire.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a3"><span><b>Un bénéficiaire qui ne peut pas signer</b><p class="how">Avec <span class="k">Mme Zaïnaba Soilihi</span> : arrivée, fin, puis <span class="k">Le bénéficiaire ne peut pas signer</span>. Choisis un motif, puis signe comme intervenante.</p><p class="check"><strong>À vérifier :</strong> un seul appui suffit pour le motif, sans rien écrire.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a4"><span><b>Un passage annulé</b><p class="how">Avec <span class="k">M. Abdou Houmadi</span> : touche <span class="k">Le passage n'a pas lieu</span> et choisis <span class="k">Ne souhaite pas ouvrir la porte</span>.</p><p class="check"><strong>À vérifier :</strong> le passage apparaît « Non réalisé », et le motif te semble couvrir les situations du terrain (rendez-vous à l'hôpital, porte fermée…).</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a5"><span><b>Un jour férié et un retard</b><p class="how">En haut de la page, coche <span class="k">Simuler un jour férié</span>. Ouvre <span class="k">Mme Echati Madi</span>, touche <span class="k">Je suis arrivée</span> et choisis un motif. Puis touche <span class="k">Signaler un retard ou un dépassement</span>.</p><p class="check"><strong>À vérifier :</strong> le bandeau « férié » s'affiche et le motif est demandé avant de commencer.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a6"><span><b>Remplacer une collègue</b><p class="how">Sur le planning, touche <span class="k">Je remplace une collègue</span>. Change les heures, choisis un motif, laisse cochée la case paie, puis envoie. Essaie aussi une heure de départ avant l'arrivée.</p><p class="check"><strong>À vérifier :</strong> la durée se calcule seule, et une erreur claire s'affiche si les heures sont incohérentes.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a7"><span><b>Verrouiller l'application</b><p class="how">Touche <span class="k">Verrouiller</span> en haut du planning, puis reconnecte-toi.</p><p class="check"><strong>À vérifier :</strong> le code est redemandé et tes passages sont toujours là.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="a8"><span><b>Consulter mes heures</b><p class="how">En bas du téléphone, touche <span class="k">🕒 Mes heures</span>.</p><p class="check"><strong>À vérifier :</strong> les heures jour par jour et le reste à faire pour le contrat de 35 h sont faciles à comprendre.</p></span></label></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="s2">
+    <div class="shead"><h2 id="s2">2. Côté bureau</h2><span class="count" data-count="b"></span></div>
+    <ol class="steps" data-group="b">
+      <li class="step"><label><input type="checkbox" id="b1"><span><b>Suivre la journée</b><p class="how">En haut, touche <span class="k">Bureau</span>, puis la rubrique <span class="k">Aujourd'hui</span>.</p><p class="check"><strong>À vérifier :</strong> tes passages de l'étape 1 apparaissent avec les missions réalisées, et la liste « À vérifier » signale un passage sans mission cochée. La porte restée fermée apparaît en rouge « À appeler ».</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="b2"><span><b>Valider le remplacement</b><p class="how">Dans « À vérifier », touche <span class="k">Valider</span> sur le remplacement, et <span class="k">Traiter</span> sur une autre ligne.</p><p class="check"><strong>À vérifier :</strong> la ligne disparaît de la liste.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="b3"><span><b>Calculer les heures</b><p class="how">Rubrique <span class="k">Heures et paie</span>, puis <span class="k">Calculer les heures</span>.</p><p class="check"><strong>À vérifier :</strong> le détail est clair pour un contrat de 35 h (heures supplémentaires) et pour un temps partiel de 24 h (heures complémentaires).</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="b4"><span><b>Préparer l'export</b><p class="how">Touche <span class="k">Préparer l'export paie</span>, puis <span class="k">Copier</span>.</p><p class="check"><strong>À vérifier :</strong> l'aperçu reprend tes passages du jour.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="b6"><span><b>Envoyer les preuves au Département</b><p class="how">Rubrique <span class="k">Envoi au Département</span>, puis <span class="k">Envoyer le relevé au Département</span>. En haut, touche <span class="k">Département</span> : valide le relevé, ou demande une correction et renvoie-le depuis le bureau.</p><p class="check"><strong>À vérifier :</strong> on comprend facilement le chemin assistante de vie → association → Département, et ce que voit le Département.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="b5"><span><b>Qui intervient chez qui</b><p class="how">Rubrique <span class="k">Bénéficiaires</span> : regarde la fiche de <span class="k">Mme Fatima Ousseni</span>, puis ouvre d'autres bénéficiaires.</p><p class="check"><strong>À vérifier :</strong> le nombre d'intervenantes et l'alerte « à surveiller » sont faciles à comprendre.</p></span></label></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="s3">
+    <div class="shead"><h2 id="s3">3. Tests libres</h2><span class="count" data-count="c"></span></div>
+    <ol class="steps" data-group="c">
+      <li class="step"><label><input type="checkbox" id="c1"><span><b>Essayer de « casser » l'appli</b><p class="how">Appuie deux fois très vite sur un bouton, tourne le téléphone, passe d'un écran à l'autre rapidement.</p><p class="check"><strong>À vérifier :</strong> pas de doublon, pas d'écran bloqué ni d'affichage coupé.</p></span></label></li>
+      <li class="step"><label><input type="checkbox" id="c2"><span><b>Se mettre à la place d'une assistante de vie</b><p class="how">Imagine que tu enchaînes 5 domiciles dans la journée.</p><p class="check"><strong>À vérifier :</strong> est-ce assez rapide ? Les textes et boutons sont-ils assez gros ?</p></span></label></li>
+    </ol>
+  </section>
+
+  <div class="end">
+    <h2>Dernière étape : ton avis</h2>
+    <p>Note les bugs, ce qui n'est pas clair et tes idées. Le formulaire prépare un message que tu m'envoies ensuite en un clic.</p>
+    <a class="btn solid" href="avis.html">Donner mon avis ›</a>
+    <button class="reset" id="reset" type="button">Décocher toutes les étapes</button>
+  </div>
+
+  <footer>Outil de suivi et de signature dématérialisée · version d’essai · les personnes, adresses et heures sont des exemples.</footer>
+</div>
+
+<script>
+(function(){
+  const KEY = 'guide-test-coches';
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
+  const boxes = Array.from(document.querySelectorAll('.step input'));
+  boxes.forEach(b => { b.checked = !!saved[b.id]; });
+  function counts(){
+    ['a','b','c'].forEach(g => {
+      const list = Array.from(document.querySelectorAll('[data-group="' + g + '"] input'));
+      document.querySelector('[data-count="' + g + '"]').textContent = list.filter(x => x.checked).length + ' / ' + list.length + ' faites';
+    });
+  }
+  function save(){
+    const s = {}; boxes.forEach(b => { if (b.checked) s[b.id] = true; });
+    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e) {}
+  }
+  boxes.forEach(b => b.addEventListener('change', () => { save(); counts(); }));
+  document.getElementById('reset').addEventListener('click', () => { boxes.forEach(b => { b.checked = false; }); save(); counts(); });
+  counts();
+})();
+</script>
+</body>
+</html>

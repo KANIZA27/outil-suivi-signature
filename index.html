@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Outil de suivi et de signature dématérialisée : un projet pour l'aide à domicile à Mayotte. Présentation, application d'essai, guide de test et avis.">
+<title>Fiche projet · Outil de suivi et de signature dématérialisée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+<style>
+/* Layout: one reading column (fiche), deliverable cards at the top, then numbered sections that follow the project's real order */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --sunk:#E6ECE5; --ink:#1F2A2E; --muted:#56645F; --line:#D5DCD3;
+  --accent:#2F6B57; --accent-ink:#FFFFFF; --accent-soft:#DCEBE3; --warn-soft:#FBEBC8; --warn:#7A5000; --hero:#1F2E2B; --hero-ink:#F3F5F2; --hero-muted:#B9CEC6;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131A1A; --surface:#1B2424; --sunk:#243030; --ink:#E7EEEA; --muted:#A3B5AF; --line:#2F3D3C;
+  --accent:#7CC4A6; --accent-ink:#0E1A16; --accent-soft:#1F3A30; --warn-soft:#3A2E14; --warn:#F0C066; --hero:#0E1514; --hero-ink:#E7EEEA; --hero-muted:#9DB0AA;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131A1A; --surface:#1B2424; --sunk:#243030; --ink:#E7EEEA; --muted:#A3B5AF; --line:#2F3D3C;
+  --accent:#7CC4A6; --accent-ink:#0E1A16; --accent-soft:#1F3A30; --warn-soft:#3A2E14; --warn:#F0C066; --hero:#0E1514; --hero-ink:#E7EEEA; --hero-muted:#9DB0AA;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding:0 16px;padding-block:24px 64px}
+.page{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+a{color:var(--accent);font-weight:700}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.hero{background:var(--hero);color:var(--hero-ink);border-radius:24px;padding:36px 32px;display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero .eyebrow{color:#9FD3BC}
+.hero h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800}
+.hero p{color:var(--hero-muted);font-size:1.1rem;max-width:62ch}
+.pitch{background:rgba(255,255,255,.07);border-radius:14px;padding:16px 18px;color:var(--hero-ink)!important;font-size:1rem!important}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);font-weight:400}
+.card:hover{border-color:var(--accent)}
+.card b{font-family:var(--display);font-size:1.15rem}
+.card span{font-size:.92rem;color:var(--muted)}
+.card em{font-style:normal;color:var(--accent);font-weight:700;font-size:.9rem;margin-top:auto}
+section{display:flex;flex-direction:column;gap:14px}
+section h2{font-size:1.6rem;font-weight:800;display:flex;gap:12px;align-items:baseline}
+section h2 small{font-family:var(--body);font-size:.85rem;color:var(--accent);font-weight:700;min-width:1.6em}
+.lead{font-size:1.08rem;max-width:68ch}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.box h3{font-size:1.1rem}
+.box p,.box li{color:var(--muted);font-size:.96rem}
+.box ul{margin:0;padding-left:18px}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td:first-child{font-weight:700;white-space:nowrap}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.steps li{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.steps li.hl{border:2px solid var(--accent)}
+.n{width:44px;height:44px;border-radius:22px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.2rem}
+.steps b{display:block}
+.steps p{color:var(--muted);font-size:.95rem}
+.dur{font-size:.85rem;font-weight:700;color:var(--accent);white-space:nowrap}
+.money{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.money .big{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--accent);line-height:1.1}
+.note{background:var(--warn-soft);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:.95rem}
+.note b{color:var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--sunk);border-radius:99px;padding:6px 12px;font-size:.88rem}
+.tips{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:520px){.hero{padding:26px 20px}.steps li{grid-template-columns:44px 1fr}.dur{grid-column:2}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="hero">
+  <div class="eyebrow">Mon projet · Aide à domicile à Mayotte</div>
+  <h1>Outil de suivi et de signature dématérialisée</h1>
+  <p>Une application sur téléphone pour remplacer les feuilles papier qu'on fait signer aux personnes aidées. L'assistante de vie note son passage, coche ce qu'elle a fait, fait signer, et ses heures se comptent toutes seules.</p>
+  <p class="pitch"><b>L'idée en 30 secondes :</b> « À la fin du mois, j'ai vu les assistantes de vie courir après les signatures, et le bureau recompter les heures à la main. Avec cette application, tout se fait sur le téléphone, pendant le passage. Pas de papier perdu, pas de calcul à la main. Elle est pensée pour Mayotte et pour montrer que notre métier compte. »</p>
+  <p>Projet de Kaniza SAINDOU · 26 octobre 2026 · version d'essai</p>
+</header>
+
+<section aria-labelledby="avis">
+  <h2 id="avis"><small>●</small>J'ai besoin de votre avis</h2>
+  <p class="lead">Ce projet n'est pas encore lancé. Avant de le présenter, j'aimerais savoir ce que vous en pensez. C'est simple : suivez le guide (15 minutes), essayez l'application, puis donnez votre avis.</p>
+  <div class="cards">
+    <a class="card" href="guide.html"><b>1. Le guide</b><span>Les étapes pour essayer l'application.</span><em>Commencer ›</em></a>
+    <a class="card" href="application.html"><b>2. L'application</b><span>À essayer de préférence sur téléphone.</span><em>Ouvrir ›</em></a>
+    <a class="card" href="avis.html"><b>3. Votre avis</b><span>Ce qui ne marche pas, ce qui n'est pas clair, vos idées.</span><em>Donner mon avis ›</em></a>
+  </div>
+  <p class="lead" style="margin-top:6px">Pour en savoir plus :</p>
+  <div class="cards">
+    <a class="card" href="https://claude.ai/artifact/FBf3t5LYJWBv1A4jEtWrUB" target="_blank" rel="noopener"><b>La présentation</b><span>12 pages pour comprendre le projet.</span><em>Voir ›</em></a>
+    <a class="card" href="https://claude.ai/artifact/LZkoQfkCeqZnnxJU7iXTqy" target="_blank" rel="noopener"><b>Les dessins des écrans</b><span>Sur téléphone, tablette et ordinateur.</span><em>Voir ›</em></a>
+    <a class="card" href="https://claude.ai/code/artifact/4ed26619-f5f5-486c-961a-0899ed23c397" target="_blank" rel="noopener"><b>Le dossier complet</b><span>Tous les détails du projet.</span><em>Lire ›</em></a>
+  </div>
+</section>
+
+<section aria-labelledby="constat">
+  <h2 id="constat"><small>01</small>Ce que j'ai vu sur le terrain</h2>
+  <p class="lead">Aujourd'hui, chaque passage est noté sur une feuille papier que la personne aidée doit signer. À la fin du mois, c'est compliqué pour tout le monde.</p>
+  <div class="three">
+    <div class="box"><h3>Du stress</h3><p>Il faut récupérer toutes les signatures, puis apporter les feuilles au bureau.</p></div>
+    <div class="box"><h3>Des feuilles perdues</h3><p>Une feuille perdue ou abîmée, ce sont des heures difficiles à prouver et à faire payer.</p></div>
+    <div class="box"><h3>Des calculs à la main</h3><p>Au bureau, on recompte toutes les heures à la main pour faire les paies et les factures.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="unique">
+  <h2 id="unique"><small>02</small>Ce qui rend ce projet spécial</h2>
+  <div class="three">
+    <div class="box"><h3>Fait pour Mayotte</h3><p>Marche même sans réseau, connaît les jours fériés d'ici (27 avril), et explique la signature en français et en arabe.</p></div>
+    <div class="box"><h3>Rien à écrire</h3><p>Tout se fait en touchant l'écran une fois. L'assistante de vie ne perd pas de temps entre deux maisons.</p></div>
+    <div class="box"><h3>Notre métier mis en valeur</h3><p>Un petit message chaque jour pour encourager, et les heures visibles après chaque passage.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="chemin">
+  <h2 id="chemin"><small>●</small>Une seule application pour tout le monde</h2>
+  <div class="three">
+    <div class="box"><h3>👩🏾 L'assistante de vie</h3><p>Note son passage, coche ce qu'elle a fait et fait signer la personne aidée.</p></div>
+    <div class="box"><h3>🏢 L'association</h3><p>Voit tout en direct, vérifie, prépare la paie et envoie les preuves au Département.</p></div>
+    <div class="box"><h3>🏛️ Le Département</h3><p>Reçoit les preuves sans papier, valide et paie l'association plus vite.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="fonctions">
+  <h2 id="fonctions"><small>03</small>Ce que fait l'application</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Quoi</th><th>Comment ça aide</th></tr></thead>
+    <tbody>
+      <tr><td>Noter le passage</td><td>Un appui en arrivant, un appui en partant. On coche ce qu'on a fait : toilette, repas, courses, discussion…</td></tr>
+      <tr><td>Deux signatures</td><td>La personne aidée signe, puis l'assistante de vie. On peut signer avec son prénom en français ou en arabe, faire une croix, signer en grand, ou juste toucher l'écran.</td></tr>
+      <tr><td>Voir ses heures</td><td>Après chaque passage : le temps fait, et le total du jour, de la semaine et du mois.</td></tr>
+      <tr><td>Compter les heures</td><td>L'application compte les heures selon le contrat (35 h ou moins) et montre les heures en plus.</td></tr>
+      <tr><td>Remplacer une collègue</td><td>Un bouton pour dire qu'on a remplacé une collègue, et une case pour être payée de ces heures.</td></tr>
+      <tr><td>Jours fériés</td><td>L'application le sait toute seule, et les heures sont mieux payées.</td></tr>
+      <tr><td>Passage annulé</td><td>Rendez-vous à l'hôpital, porte fermée, absence… On choisit la raison d'un appui. Si c'est inquiétant, le bureau est prévenu tout de suite.</td></tr>
+      <tr><td>Qui vient chez qui</td><td>Le bureau voit combien d'intervenantes différentes viennent chez chaque personne.</td></tr>
+      <tr><td>Pour le bureau</td><td>Suivre la journée, voir les problèmes à vérifier, préparer le fichier pour la paie.</td></tr>
+      <tr><td>Lien avec le Département</td><td>L'association envoie le relevé des heures (APA, PCH) au Conseil départemental en un clic. Le Département vérifie, valide ou demande une correction, puis paie.</td></tr>
+      <tr><td>Sécurité</td><td>Un code ou l'empreinte du doigt pour ouvrir l'application. Si le téléphone est perdu, le bureau bloque l'accès.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="demarche">
+  <h2 id="demarche"><small>04</small>Comment le mettre en place, étape par étape</h2>
+  <ol class="steps">
+    <li><span class="n">1</span><div><b>Écouter</b><p>Voir comment ça se passe aujourd'hui, avec qui, avec quel matériel.</p></div><span class="dur">2 à 3 sem.</span></li>
+    <li><span class="n">2</span><div><b>Choisir et préparer</b><p>Utiliser une application qui existe déjà ou en créer une, et préparer une première version simple.</p></div><span class="dur">3 à 4 sem.</span></li>
+    <li class="hl"><span class="n">3</span><div><b>Tester</b><p>Vérifier que tout marche bien et que c'est facile, avec de faux noms.</p></div><span class="dur">2 à 3 sem.</span></li>
+    <li><span class="n">4</span><div><b>Essayer en vrai</b><p>Avec 2 ou 3 assistantes de vie volontaires, en gardant le papier le premier mois.</p></div><span class="dur">4 à 6 sem.</span></li>
+    <li><span class="n">5</span><div><b>Accompagner</b><p>Former les équipes sur le terrain, avec patience, puis l'étendre à tout le monde.</p></div><span class="dur">Ensuite</span></li>
+  </ol>
+</section>
+
+<section aria-labelledby="budget">
+  <h2 id="budget"><small>05</small>Combien de temps et combien ça coûte</h2>
+  <div class="money">
+    <div class="box"><h3>A · Une application qui existe déjà</h3><div class="big">2 à 4 mois</div><p>Quelques euros par intervenante et par mois. C'est rapide, mais moins adapté à notre terrain.</p></div>
+    <div class="box"><h3>B · Créer notre application</h3><div class="big">6 à 9 mois</div><p>Entre 15 000 et 40 000 € pour la créer, puis environ 50 à 300 € par mois pour la faire marcher.</p></div>
+  </div>
+  <p class="note"><b>Prix approximatifs</b>, à vérifier avec des devis. Il faut aussi prévoir des téléphones si besoin, et du temps pour former les équipes.</p>
+</section>
+
+<section aria-labelledby="questions">
+  <h2 id="questions"><small>06</small>Ce qu'il reste à vérifier</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Question</th><th>Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Ceux qui paient les heures sont-ils d'accord ?</td><td>Le Département, la CSSM ou les mutuelles ont peut-être leurs propres règles.</td></tr>
+      <tr><td>Comment prouver qu'on est bien sur place ?</td><td>Par exemple avec un code à scanner collé dans la maison.</td></tr>
+      <tr><td>Quelles langues dans l'application ?</td><td>Shimaoré, kibushi : à choisir avec les assistantes de vie.</td></tr>
+      <tr><td>Et le temps de trajet ?</td><td>Le temps et les kilomètres entre deux maisons ne sont pas encore comptés.</td></tr>
+      <tr><td>Les informations des personnes aidées</td><td>Elles sont privées : il faut bien les protéger, et que seules les bonnes personnes puissent les voir.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<footer>Projet Outil de suivi et de signature dématérialisée · version d'essai : les noms, adresses et heures sont inventés · merci de ne pas partager sans mon accord.</footer>
+</div>
+</body>
+</html>
